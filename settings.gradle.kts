@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Moovy"
 include(":app")
 include(":core")
+include(":features")
+include(":features:home")
