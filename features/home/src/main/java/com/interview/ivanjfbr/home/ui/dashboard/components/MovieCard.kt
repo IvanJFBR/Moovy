@@ -1,6 +1,7 @@
 package com.interview.ivanjfbr.home.ui.dashboard.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,11 +26,13 @@ fun MovieCard(
     movieImageUrl: String?,
     contentDescription: String,
     movieTitle: String,
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .padding(horizontal = 8.dp, vertical = 6.dp)
-            .width(120.dp),
+            .width(120.dp)
+            .clickable { onClick.invoke() },
         shape = RoundedCornerShape(8.dp)
     ) {
         Column {

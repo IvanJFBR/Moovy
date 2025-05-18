@@ -5,5 +5,5 @@ sealed class Screens(val route: String) {
     object Search : Screens("search_screen")
     object Favorites : Screens("favorites_screen")
     object ViewAll : Screens("view_all_screen")
-    object MovieDetailsScreen : Screens("movie_details_screen")
+    object MovieDetailScreen : Screens("movie_detail_screen")
 }

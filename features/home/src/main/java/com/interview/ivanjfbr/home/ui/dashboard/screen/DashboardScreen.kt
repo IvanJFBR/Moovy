@@ -15,44 +15,51 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.interview.ivanjfbr.core.ui.MoovyDefaultTheme
 import com.interview.ivanjfbr.core.ui.UiState
 import com.interview.ivanjfbr.home.R
 import com.interview.ivanjfbr.home.data.model.MoviesSectionResponse
 import com.interview.ivanjfbr.home.ui.dashboard.DashboardViewModel
 import com.interview.ivanjfbr.home.ui.dashboard.components.MovieCard
+import com.interview.ivanjfbr.home.ui.navigation.models.Screens
 
 @Composable
 fun DashboardScreen(
+    navController: NavController,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
     MoovyDefaultTheme {
         LazyColumn {
             item {
                 RenderMoviesSectionList(
-                    sectionTitle = stringResource(R.string.now_playing) ,
-                    uiState = viewModel.nowPlayingState.collectAsStateWithLifecycle().value
+                    sectionTitle = stringResource(R.string.now_playing),
+                    uiState = viewModel.nowPlayingState.collectAsStateWithLifecycle().value,
+                    navController = navController
                 )
             }
 
             item {
                 RenderMoviesSectionList(
-                    sectionTitle = stringResource(R.string.popular) ,
-                    uiState = viewModel.popularState.collectAsStateWithLifecycle().value
+                    sectionTitle = stringResource(R.string.popular),
+                    uiState = viewModel.popularState.collectAsStateWithLifecycle().value,
+                    navController = navController
                 )
             }
 
             item {
                 RenderMoviesSectionList(
-                    sectionTitle = stringResource(R.string.top_rated) ,
-                    uiState = viewModel.topRatedState.collectAsStateWithLifecycle().value
+                    sectionTitle = stringResource(R.string.top_rated),
+                    uiState = viewModel.topRatedState.collectAsStateWithLifecycle().value,
+                    navController = navController
                 )
             }
 
             item {
                 RenderMoviesSectionList(
-                    sectionTitle = stringResource(R.string.upcoming) ,
-                    uiState = viewModel.upcomingState.collectAsStateWithLifecycle().value
+                    sectionTitle = stringResource(R.string.upcoming),
+                    uiState = viewModel.upcomingState.collectAsStateWithLifecycle().value,
+                    navController = navController
                 )
             }
         }
@@ -62,7 +69,9 @@ fun DashboardScreen(
 @Composable
 fun RenderMoviesSectionList(
     sectionTitle: String,
-    uiState: UiState<MoviesSectionResponse>) {
+    uiState: UiState<MoviesSectionResponse>,
+    navController: NavController
+) {
     when (uiState) {
         is UiState.Loading -> {}
         is UiState.Success -> {
@@ -86,7 +95,12 @@ fun RenderMoviesSectionList(
                         MovieCard(
                             movieImageUrl = item.posterPath,
                             contentDescription = item.title ?: "",
-                            movieTitle = item.title ?: ""
+                            movieTitle = item.title ?: "",
+                            onClick = {
+                                navController.navigate(
+                                    route = "${Screens.MovieDetailScreen.route}/${item.movieId}"
+                                )
+                            }
                         )
                     }
                 }
