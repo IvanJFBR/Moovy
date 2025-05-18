@@ -3,4 +3,8 @@
     <string name="dashboard">Dashboard</string>
     <string name="search">Busca</string>
     <string name="favorites">Favoritos</string>
+    <string name="now_playing">Em cartaz</string>
+    <string name="popular">Populares</string>
+    <string name="top_rated">Melhores Avaliados</string>
+    <string name="upcoming">Em breve</string>
 </resources>
