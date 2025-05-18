@@ -14,7 +14,7 @@ import com.interview.ivanjfbr.core.commons.Constants.TMDB_BASE_URL
 import dagger.hilt.InstallIn
 
 @Module
-@InstallIn
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides

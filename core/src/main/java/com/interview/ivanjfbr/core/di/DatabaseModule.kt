@@ -1,6 +1,7 @@
 package com.interview.ivanjfbr.core.di
 
 import android.content.Context
+import androidx.room.Room
 import com.interview.ivanjfbr.core.commons.Constants.DB_MOOVY
 import com.interview.ivanjfbr.core.data.local_db.AppDatabase
 import dagger.Module

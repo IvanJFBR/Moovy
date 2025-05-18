@@ -64,7 +64,14 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
+
+    implementation(libs.hilt.navigation.compose)
 
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+
+    implementation(project(":core"))
+    implementation(project(":features:home"))
 }
