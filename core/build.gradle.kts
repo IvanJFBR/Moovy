@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +8,11 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
+
+val localProperties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+val tmdbApiKey: String = localProperties.getProperty("TMDB_API_KEY")
 
 android {
     namespace = "com.interview.ivanjfbr.core"
@@ -16,6 +23,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+
+        buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
     }
 
     buildTypes {
@@ -66,4 +76,7 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
