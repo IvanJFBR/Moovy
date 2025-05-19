@@ -21,7 +21,7 @@ import com.interview.ivanjfbr.core.ui.UiState
 import com.interview.ivanjfbr.home.R
 import com.interview.ivanjfbr.home.data.model.MoviesSectionResponse
 import com.interview.ivanjfbr.home.ui.dashboard.DashboardViewModel
-import com.interview.ivanjfbr.home.ui.dashboard.components.MovieCard
+import com.interview.ivanjfbr.core.ui.components.MovieCard
 import com.interview.ivanjfbr.home.ui.navigation.models.Screens
 
 @Composable
@@ -98,7 +98,7 @@ fun RenderMoviesSectionList(
                             movieTitle = item.title ?: "",
                             onClick = {
                                 navController.navigate(
-                                    route = "${Screens.MovieDetailScreen.route}/${item.movieId}"
+                                    route = Screens.MovieDetailScreen.route + "?movieId=${item.movieId.toString()}&moviesTitle=${item.title}"
                                 )
                             }
                         )

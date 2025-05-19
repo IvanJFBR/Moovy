@@ -29,10 +29,11 @@ fun MainNavHost(
         }
 
         composable(
-            route = Screens.MovieDetailScreen.route + "/{movieId}",
+            route = Screens.MovieDetailScreen.route + "?movieId={movieId}&moviesTitle={moviesTitle}",
             arguments = listOf(navArgument(name = "movieId") { type = NavType.IntType })
         ) {
-            MovieDetailScreen()
+            val moviesTitle = it.arguments?.getString("moviesTitle") ?: ""
+            MovieDetailScreen(moviesTitle)
         }
     }
 }

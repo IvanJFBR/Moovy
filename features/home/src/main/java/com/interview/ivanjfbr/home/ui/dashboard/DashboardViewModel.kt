@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.interview.ivanjfbr.core.ui.UiState
 import com.interview.ivanjfbr.home.data.model.MoviesSectionRequest
 import com.interview.ivanjfbr.home.data.model.MoviesSectionResponse
-import com.interview.ivanjfbr.home.data.network.MoviesUrl.NOW_PLAYING
-import com.interview.ivanjfbr.home.data.network.MoviesUrl.POPULAR
-import com.interview.ivanjfbr.home.data.network.MoviesUrl.TOP_RATED
-import com.interview.ivanjfbr.home.data.network.MoviesUrl.UPCOMING
+import com.interview.ivanjfbr.home.data.network.MoviesCategoryUrl.NOW_PLAYING
+import com.interview.ivanjfbr.home.data.network.MoviesCategoryUrl.POPULAR
+import com.interview.ivanjfbr.home.data.network.MoviesCategoryUrl.TOP_RATED
+import com.interview.ivanjfbr.home.data.network.MoviesCategoryUrl.UPCOMING
 import com.interview.ivanjfbr.home.domain.interactor.GetMoviesSectionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
