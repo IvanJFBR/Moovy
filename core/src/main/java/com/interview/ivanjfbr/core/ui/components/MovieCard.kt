@@ -1,4 +1,4 @@
-package com.interview.ivanjfbr.home.ui.dashboard.components
+package com.interview.ivanjfbr.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
