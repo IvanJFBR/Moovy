@@ -1,5 +1,6 @@
 package com.interview.ivanjfbr.home.data.repository
 
+import com.interview.ivanjfbr.home.data.model.MovieResponse
 import com.interview.ivanjfbr.home.data.model.MoviesSectionResponse
 import com.interview.ivanjfbr.home.data.network.MoviesApi
 import com.interview.ivanjfbr.home.domain.repository.MoviesRepository
@@ -15,6 +16,12 @@ class MoviesRepositoryImpl @Inject constructor(
     override suspend fun getSectionMoviesList(url: String, page: Int): Flow<MoviesSectionResponse> {
         return flow {
             emit(moviesApi.getMoviesSection(url, page))
+        }
+    }
+
+    override suspend fun getMovieDetails(movieId: String): Flow<MovieResponse> {
+        return flow {
+            emit(moviesApi.getMovieDetails(movieId))
         }
     }
 }
