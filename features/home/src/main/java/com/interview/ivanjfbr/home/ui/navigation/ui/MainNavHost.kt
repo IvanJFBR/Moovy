@@ -13,6 +13,7 @@ import com.interview.ivanjfbr.home.ui.dashboard.screen.DashboardScreen
 import com.interview.ivanjfbr.home.ui.movie_detail.screen.MovieDetailScreen
 import com.interview.ivanjfbr.home.ui.navigation.models.BottomBarRoutes
 import com.interview.ivanjfbr.home.ui.navigation.models.Screens
+import com.interview.ivanjfbr.home.ui.see_all.screen.SeeAllScreen
 
 @Composable
 fun MainNavHost(
@@ -34,6 +35,17 @@ fun MainNavHost(
         ) {
             val moviesTitle = it.arguments?.getString("moviesTitle") ?: ""
             MovieDetailScreen(moviesTitle)
+        }
+
+        composable(
+            route = Screens.SeeAll.route + "?categoryUrl={categoryUrl}", arguments = listOf(
+                navArgument(name = "categoryUrl") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                }
+            )
+        ) {
+            SeeAllScreen(navController = navController)
         }
     }
 }
