@@ -1,9 +1,6 @@
 package com.interview.ivanjfbr.home.ui.navigation.ui
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,13 +14,11 @@ import com.interview.ivanjfbr.home.ui.see_all.screen.SeeAllScreen
 
 @Composable
 fun MainNavHost(
-    navController: NavHostController,
-    innerPadding: PaddingValues
+    navController: NavHostController
 ) {
     NavHost(
         navController = navController,
-        startDestination = BottomBarRoutes.Dashboard.route,
-        modifier = Modifier.padding(innerPadding)
+        startDestination = BottomBarRoutes.Dashboard.route
     ) {
         composable(BottomBarRoutes.Dashboard.route) {
             DashboardScreen(navController)
@@ -34,18 +29,19 @@ fun MainNavHost(
             arguments = listOf(navArgument(name = "movieId") { type = NavType.IntType })
         ) {
             val moviesTitle = it.arguments?.getString("moviesTitle") ?: ""
-            MovieDetailScreen(moviesTitle)
+            MovieDetailScreen(navController = navController, title = moviesTitle)
         }
 
         composable(
-            route = Screens.SeeAll.route + "?categoryUrl={categoryUrl}", arguments = listOf(
+            route = Screens.SeeAll.route + "?categoryUrl={categoryUrl}&sectionTitle={sectionTitle}", arguments = listOf(
                 navArgument(name = "categoryUrl") {
                     type = NavType.StringType
                     defaultValue = ""
                 }
             )
         ) {
-            SeeAllScreen(navController = navController)
+            val sectionTitle = it.arguments?.getString("sectionTitle") ?: ""
+            SeeAllScreen(navController = navController, title = sectionTitle)
         }
     }
 }

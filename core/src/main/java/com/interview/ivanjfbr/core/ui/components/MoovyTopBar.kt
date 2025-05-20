@@ -12,10 +12,10 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolBar(title: String, onBack: () -> Unit) {
+fun MoovyTopBar(title: String? = null, onBack: () -> Unit) {
     CenterAlignedTopAppBar(
         title = {
-            Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            title?.let { Text(it, maxLines = 1, overflow = TextOverflow.Ellipsis) }
         },
         navigationIcon = {
             IconButton(onClick = onBack) {

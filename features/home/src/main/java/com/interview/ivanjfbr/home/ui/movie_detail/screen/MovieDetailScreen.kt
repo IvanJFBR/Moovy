@@ -20,22 +20,38 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import com.interview.ivanjfbr.core.ui.MoovyDefaultTheme
 import com.interview.ivanjfbr.core.ui.UiState
+import com.interview.ivanjfbr.core.ui.components.ErrorView
+import com.interview.ivanjfbr.core.ui.components.LoadingView
+import com.interview.ivanjfbr.core.ui.components.MoovyTopBar
 import com.interview.ivanjfbr.core.ui.getTMDBImageRequest
 import com.interview.ivanjfbr.home.data.model.MovieResponse
 import com.interview.ivanjfbr.home.ui.movie_detail.MovieDetailViewModel
 
 @Composable
 fun MovieDetailScreen(
+    navController: NavController,
     title: String,
     viewModel: MovieDetailViewModel = hiltViewModel()
 ) {
-    MoovyDefaultTheme {
+    MoovyDefaultTheme(
+        topBar = {
+            MoovyTopBar(
+                title = title,
+                onBack = { navController.popBackStack() }
+            )
+        }
+    ) {
         when (val uiState = viewModel.state.collectAsState().value) {
-            is UiState.Error -> {}
-            is UiState.Loading -> {}
+            is UiState.Error -> {
+                ErrorView()
+            }
+            is UiState.Loading -> {
+                LoadingView()
+            }
             is UiState.Success -> {
                 MovieDetailContent(uiState.data)
             }

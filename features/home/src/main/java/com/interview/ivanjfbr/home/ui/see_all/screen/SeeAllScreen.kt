@@ -15,6 +15,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.interview.ivanjfbr.core.ui.MoovyDefaultTheme
 import com.interview.ivanjfbr.core.ui.components.HandlePagingResult
+import com.interview.ivanjfbr.core.ui.components.MoovyTopBar
 import com.interview.ivanjfbr.core.ui.components.MovieCard
 import com.interview.ivanjfbr.core.ui.components.PaginationProgress
 import com.interview.ivanjfbr.home.ui.navigation.models.Screens
@@ -23,9 +24,17 @@ import com.interview.ivanjfbr.home.ui.see_all.SeeAllViewModel
 @Composable
 fun SeeAllScreen(
     navController: NavController,
+    title: String,
     viewModel: SeeAllViewModel = hiltViewModel()
 ) {
-    MoovyDefaultTheme {
+    MoovyDefaultTheme(
+        topBar = {
+            MoovyTopBar(
+                title = title,
+                onBack = { navController.popBackStack() }
+            )
+        }
+    ) {
         Box(modifier = Modifier.padding(bottom = 20.dp)) {
             val movieItems = viewModel.movies.collectAsLazyPagingItems()
             val modifier =
