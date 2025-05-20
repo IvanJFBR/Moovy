@@ -1,9 +1,9 @@
 package com.interview.ivanjfbr.home.ui.navigation.models
 
 sealed class Screens(val route: String) {
-    object Dashboard : Screens("dashboard_screen")
-    object Search : Screens("search_screen")
-    object Favorites : Screens("favorites_screen")
-    object ViewAll : Screens("view_all_screen")
-    object MovieDetailScreen : Screens("movie_detail_screen")
+    data object Dashboard : Screens("dashboard_screen")
+    data object Search : Screens("search_screen")
+    data object Favorites : Screens("favorites_screen")
+    data object SeeAll : Screens("see_all_screen")
+    data object MovieDetailScreen : Screens("movie_detail_screen")
 }
