@@ -13,8 +13,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,13 +31,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.interview.ivanjfbr.core.ui.MoovyDefaultTheme
 import com.interview.ivanjfbr.core.ui.UiState
+import com.interview.ivanjfbr.core.ui.components.ErrorView
+import com.interview.ivanjfbr.core.ui.components.LoadingView
 import com.interview.ivanjfbr.core.ui.components.MovieCard
 import com.interview.ivanjfbr.home.R
 import com.interview.ivanjfbr.home.data.model.MoviesSectionResponse
 import com.interview.ivanjfbr.home.data.network.MoviesCategoryUrl
 import com.interview.ivanjfbr.home.ui.dashboard.DashboardViewModel
+import com.interview.ivanjfbr.home.ui.navigation.models.BottomBarRoutes
 import com.interview.ivanjfbr.home.ui.navigation.models.Screens
 
 @Composable
@@ -39,7 +49,39 @@ fun DashboardScreen(
     navController: NavController,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
-    MoovyDefaultTheme {
+    MoovyDefaultTheme(
+        bottomBar = {
+            val navigationItemContentList = listOf(
+                BottomBarRoutes.Dashboard,
+                BottomBarRoutes.Search,
+                BottomBarRoutes.Favorites
+            )
+            var selectedDestination by rememberSaveable { mutableIntStateOf(0) }
+
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
+
+            if (navigationItemContentList.find { it.route == currentDestination?.route } != null) {
+                NavigationBar {
+                    navigationItemContentList.forEachIndexed { index, destination ->
+                        NavigationBarItem(
+                            selected = index == 0,
+                            onClick = {
+                                navController.navigate(route = BottomBarRoutes.Dashboard.route)
+                                selectedDestination = index
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = destination.icon,
+                                    contentDescription = stringResource(destination.titleResId)
+                                )
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    ) {
         LazyColumn {
             item {
                 RenderMoviesSectionList(
@@ -88,7 +130,9 @@ fun RenderMoviesSectionList(
     navController: NavController
 ) {
     when (uiState) {
-        is UiState.Loading -> {}
+        is UiState.Loading -> {
+            LoadingView()
+        }
         is UiState.Success -> {
             Column(
                 modifier = Modifier.padding(top = 16.dp)
@@ -112,7 +156,7 @@ fun RenderMoviesSectionList(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier.clickable(
                             onClick = {
-                                navController.navigate(Screens.SeeAll.route + "?categoryUrl=${category}")
+                                navController.navigate(Screens.SeeAll.route + "?categoryUrl=${category}&sectionTitle=${sectionTitle}")
                             },
                         )
                     ) {
@@ -151,6 +195,8 @@ fun RenderMoviesSectionList(
             }
         }
 
-        is UiState.Error -> {}
+        is UiState.Error -> {
+            ErrorView()
+        }
     }
 }
