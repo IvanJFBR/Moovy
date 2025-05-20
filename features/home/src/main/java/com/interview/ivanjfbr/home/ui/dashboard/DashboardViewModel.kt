@@ -61,8 +61,8 @@ class DashboardViewModel @Inject constructor(
                     .catch {
                         uiState.value = UiState.Error(it.message.toString())
                     }
-                    .collect { product ->
-                        uiState.value = UiState.Success(product)
+                    .collect { movie ->
+                        uiState.value = UiState.Success(movie)
                     }
             } catch (e: Exception) {
                 uiState.value = UiState.Error(e.message.toString())

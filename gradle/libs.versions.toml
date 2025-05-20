@@ -26,6 +26,8 @@ material-icons = "1.7.8"
 coil = "3.2.0"
 paging = "3.3.2"
 lottie = "6.6.6"
+mockito-kotlin = "5.4.0"
+coroutines-test = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -79,6 +81,10 @@ paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pag
 # Lottie
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 lottie-core = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+
+# Mockito and Coroutines Test
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines-test" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

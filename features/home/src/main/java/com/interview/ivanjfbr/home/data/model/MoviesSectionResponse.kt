@@ -4,20 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class MoviesSectionResponse(
     @SerializedName("dates")
-    val dates: DatesResponse?,
+    val dates: DatesResponse? = null,
     @SerializedName("page")
-    val page: Int?,
+    val page: Int? = null,
     @SerializedName("total_pages")
-    val totalPages: Int?,
+    val totalPages: Int? = null,
     @SerializedName("results")
-    val results: List<MovieResponse>?,
+    val results: List<MovieResponse>? = null,
     @SerializedName("total_results")
-    val totalResults: Int?
+    val totalResults: Int? = null
 )
 
 data class DatesResponse(
     @SerializedName("maximum")
-    val maximum: String?,
+    val maximum: String? = null,
     @SerializedName("minimum")
-    val minimum: String?
+    val minimum: String? = null
 )

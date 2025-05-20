@@ -21,7 +21,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideProductRepository(apiService: MoviesApi): MoviesRepository {
-        return MoviesRepositoryImpl(apiService)
+    fun provideMoviesRepository(moviesApi: MoviesApi): MoviesRepository {
+        return MoviesRepositoryImpl(moviesApi)
     }
 }

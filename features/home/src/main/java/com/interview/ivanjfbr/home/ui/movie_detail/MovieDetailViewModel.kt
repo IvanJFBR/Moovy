@@ -36,8 +36,8 @@ class MovieDetailViewModel @Inject constructor(
                     .catch {
                         _state.value = UiState.Error(it.message.toString())
                     }
-                    .collect { product ->
-                        _state.value = UiState.Success(product)
+                    .collect { movie ->
+                        _state.value = UiState.Success(movie)
                     }
             } catch (e: Exception) {
                 _state.value = UiState.Error(e.message.toString())
