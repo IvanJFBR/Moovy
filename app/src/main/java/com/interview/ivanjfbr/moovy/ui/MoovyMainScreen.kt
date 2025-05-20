@@ -41,7 +41,7 @@ fun MoovyMainScreen(
                         NavigationBarItem(
                             selected = index == 0,
                             onClick = {
-                                navController.navigate(route = destination.route)
+                                navController.navigate(route = BottomBarRoutes.Dashboard.route)
                                 selectedDestination = index
                             },
                             icon = {
